@@ -1,0 +1,54 @@
+/* selector{
+    property:value;
+} */
+html {
+    background-color: rgba(0, 0, 0, 0.181);
+}
+
+body {
+    color: #000;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 100%;
+    height: 100dvh;
+    /* background-color: blueviolet; */
+}
+
+p {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 900;
+}
+
+.curves2 {
+    border-radius: 50%;
+    -webkit-box-reflect: right;
+}
+
+a {
+    /* neat flex-box in css */
+    display: flex;
+    justify-items: center;
+    gap: 5px;
+    mix-blend-mode: difference;
+}
+
+h1 {
+    background: url("/images/curves1.jpeg") no-repeat center center / cover;
+    font-size: 100px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border: 1px solid #000;
+    margin: 20px;
+    padding: 20px;
+
+}
+button{
+    background-color: red;
+    font-size: medium;
+    border-radius: 100px;
+    padding: 20px;
+    margin: 10px 0;
+    border: none;
+    color: whitesmoke;
+    font-weight: 900;
+}
