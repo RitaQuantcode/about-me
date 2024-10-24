@@ -52,8 +52,15 @@ button{
     color: whitesmoke;
     font-weight: 900;
 }
-button1{
+.button1{
+    background-color: blue;
 
+
+
+}
+#button2{
+    background-color:green;
+    
 }
 
 
