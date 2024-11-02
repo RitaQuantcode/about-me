@@ -41,9 +41,8 @@ p {
     /*not making a difference*/
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 17%;
-    height: 50;
+    justify-content: space-evenly;
+    height: auto;
 }
 
 .hero-section {
@@ -57,10 +56,7 @@ p {
     box-shadow: 0 4px 10px;
 }
 
-.portfolio {
-    margin: -250px 100px 0 800px;
 
-}
 
 .portfolio-section {
     background-color: rgb(88, 174, 64);
