@@ -65,16 +65,18 @@ p {
 .portfolio-section {
     background-color: rgb(88, 174, 64);
     border-radius: 10px;
-    padding: 20px 120px 20px ;
-    border: 10px solid ;
-    box-shadow: 0 3px 10px ;
+    padding: 20px 120px 20px;
+    border: 10px solid;
+    box-shadow: 0 3px 10px;
     transition: transform 0.5sec ease;
 
 }
-.portfolio-section:hover{
+
+.portfolio-section:hover {
     transform: translate(10px 20px);
 }
-.social-links{
+
+.social-links {
     font-size: smaller;
     margin-top: 20px;
     align-items: center;
@@ -82,11 +84,13 @@ p {
     gap: 20px;
 
 }
-@media(max-width:600px){
-    .hero-page{
+
+@media(max-width:600px) {
+    .hero-page {
         flex-direction: column;
     }
-    .hero-section{
+
+    .hero-section {
         width: 100%;
     }
 }
