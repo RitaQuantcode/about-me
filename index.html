@@ -1,101 +1,116 @@
-<!--document type declarition- doctype is the very first thing you write to declare the language you'll be using  -->
 <!DOCTYPE html>
-<!--👇 HTML,root element outer shell  -->
-<html lang="en"><!--👈 opening tags -->
-
-<head><!--invisible info section -->
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewpot" content="width=device-width, intial-scale=1"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- that specifies my website should be responsive on all devices -->
-    <title>Rita Mueni- Portfolio Manager </title> <!-- this appears on the browser tab  -->
-    <link rel="stylesheet" href="styles.css"> <!-- links styles file to html -->
+    <meta name="description" content="Professional Portfolio - Portfolio Management & Investment Services">
+    <meta name="keywords" content="portfolio manager, investments, financial markets, DiamondPeak">
+    <meta name="author" content="Rita Mueni">
+    <meta property="og:title" content="Rita Mueni - Portfolio Manager">
+    <meta property="og:description" content="Professional Portfolio Management & Investment Services">
+    <meta property="og:image" content="profile.jpg">
+    <title>Rita Mueni - Portfolio Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Matemasie&family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div class="hero-page">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-image">
+                <img src="/images/ritta.png" alt="Rita Mueni" />
+            </div>
+            <div class="hero-content">
+                <span class="subtitle">CRAFTING PORTFOLIOS • CREATING LEGACIES</span>
+                <h1 class="splitting-text-anim-1 animate__active" data-splitting="words">
+                    <span class="word" data-word="RITA" style="--word-index: 0;">
+                        <span class="char" style="--char-index: 0;">R</span>
+                        <span class="char" style="--char-index: 1;">I</span>
+                        <span class="char" style="--char-index: 2;">T</span>
+                        <span class="char" style="--char-index: 3;">A</span>
+                    </span>
+                    <span class="whitespace"> </span>
+                    <span class="word" data-word="MUENI" style="--word-index: 1;">
+                        <span class="char" style="--char-index: 4;">M</span>
+                        <span class="char" style="--char-index: 5;">U</span>
+                        <span class="char" style="--char-index: 6;">E</span>
+                        <span class="char" style="--char-index: 7;">N</span>
+                        <span class="char" style="--char-index: 8;">I</span>
+                    </span>
+                </h1>
+                <h2>PORTFOLIO MANAGER</h2>
+                <h3>Founder and CEO DiamondPeak Investment Limited</h3>
+                <p class="bio">With 3 years of experience in financial markets and an impressive track record of delivering consistent returns, DiamondPeak Investment Limited combines deep market insight with a disciplined investment approach. The company's expertise spans market analysis, risk assessment and a diversified portfolio is constructed and tailored to individual client goals and risk tolerance.</p>
+            </div>
+        </section>
 
-        <img src="https://ritaquantcode.github.io/about-me/images/me.JPEG" alt="profile" width="500" height="500" class="me" />
-
-        <div class="hero-section">
-            <h1>CRAFTING PORTFOLIOS , CREATING LEGACIES</h1>
-            <h2>RITA MUENI</h2>
-            <h3>PORTFOLIO MANAGER</h3>
-            <h4>Founder and CEO DiamondPeak Investment Limited</h4>
-            <p>With 3 years of experience in financial markets and an impressive track record of delivering consistent
-                returns, DiamondPeak Investment Limited combines deep market insight with a disciplined investment
-                approach. The company's expertise
-                spans market analysis, risk assessment and a diversified portfolio is constructed and tailored to
-                individual
-                client goals and risk tolerance. Renowned for clear communication and a client-centric mindset,
-                DiamondPeak
-                expertly navigates financial markets to drive growth and secure long-term success for its clients. </p>
-        </div>
-    </div>
-    </div>
-
-    <div class="portfolio">
-        <!-- project section -->
-        <div class="portfolio-section">
-            <table>
-                <h2>INVESTMENT BASKET</h2>
+        <!-- Investment Section -->
+        <section class="achievements">
+            <h2 class="section-title">INVESTMENT BASKET</h2>
+            <div class="table-container">
                 <table>
-                    <tr>
-                        <th>Asset</th>
-                        <th>Minimum Investemnt</th>
-                        <th>Profit Split</th>
-
-                    </tr>
-                    <tr>
-                        <td>Crypto Currency</td>
-                        <td>$500</td>
-                        <td>60:40</td>
-                    </tr>
-                    <tr>
-                        <td>Derivative Index</td>
-                        <td>$500</td>
-                        <td>60:40</td>
-                    </tr>
-                    <tr>
-                        <td>Forex</td>
-                        <td>$500</td>
-                        <td>60:40</td>
-
-                    </tr>
-                    <tr>
-                        <td>Quant Trading</td>
-                        <td>$500</td>
-                        <td>60:40</td>
+                    <thead>
+                        <tr>
+                            <th>Asset</th>
+                            <th>Minimum Investment</th>
+                            <th>Profit Split</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Crypto Currency</td>
+                            <td>$500</td>
+                            <td>60:40</td>
+                        </tr>
+                        <tr>
+                            <td>Derivative Index</td>
+                            <td>$500</td>
+                            <td>60:40</td>
+                        </tr>
+                        <tr>
+                            <td>Forex</td>
+                            <td>$500</td>
+                            <td>60:40</td>
+                        </tr>
+                        <tr>
+                            <td>Quant Trading</td>
+                            <td>$500</td>
+                            <td>60:40</td>
+                        </tr>
+                    </tbody>
                 </table>
-                </tr>
-            </table>
-        </div>
+            </div>
+        </section>
 
-        <div class="social-links">
-            <h1>Let's connect</h1>
-            <a href="https://github.com/https://github.com/RitaQuantcode/about-me" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/000000/github.png" alt="GitHub">
-                GitHub
-            </a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/000000/linkedin.png" alt="LinkedIn">
-                LinkedIn
-            </a>
-            <a href="https://t.me/yourprofile" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/000000/telegram-app.png" alt="Telegram">
-                Telegram
-            </a>
-            <a href="https://twitter.com/yourprofile" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/000000/twitter.png" alt="Twitter">
-                Twitter
-            </a>
-            <a href="https://discord.com/invite/yourprofile" target="_blank">
-                <img src="https://img.icons8.com/material-outlined/24/000000/discord-logo.png" alt="Discord">
-                Discord
-            </a>
-        </div>
-    </div>
+        <!-- Social Links -->
+        <footer class="social-links">
+            <h2>Let's connect</h2>
+            <div class="social-grid">
+                <a href="https://github.com/RitaQuantcode" class="social-link">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/github.png" alt="GitHub">
+                    <span>GitHub</span>
+                </a>
+                <a href="#" class="social-link">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/linkedin.png" alt="LinkedIn">
+                    <span>LinkedIn</span>
+                </a>
+                <a href="#" class="social-link">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/telegram-app.png" alt="Telegram">
+                    <span>Telegram</span>
+                </a>
+                <a href="#" class="social-link">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/twitter.png" alt="Twitter">
+                    <span>Twitter</span>
+                </a>
+                <a href="#" class="social-link">
+                    <img src="https://img.icons8.com/material-outlined/24/000000/discord-logo.png" alt="Discord">
+                    <span>Discord</span>
+                </a>
+            </div>
+        </footer>
+    </main>
 </body>
-
-
-</html><!--👈closing tags  -->
+</html>
