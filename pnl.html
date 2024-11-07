@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PNL Tracker Elite</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        /* Primary Colors */
+        --primary-darker: #0f4d19;
+        --primary-dark: #1a5f25;
+        --primary-base: #267032;
+        --primary-light: #6fc27c;
+        --primary-lighter: #a8e0b1;
+        --bg-dark: #0a2f0f;
+        --accent-red: #ff4444;
+        --accent-green: #44ff88;
+      }
+
+      body {
+        background: #000000;
+        min-height: 100vh;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          monospace;
+      }
+
+      .blob {
+        position: fixed;
+        filter: blur(80px);
+        opacity: 0.2;
+        z-index: -1;
+        animation: blobFloat 20s ease-in-out infinite;
+      }
+
+      .blob-1 {
+        top: -10%;
+        left: -10%;
+        width: 50%;
+        height: 50%;
+        background: radial-gradient(
+          circle,
+          var(--primary-base) 0%,
+          transparent 70%
+        );
+        animation-delay: 0s;
+      }
+
+      .blob-2 {
+        bottom: -20%;
+        right: -10%;
+        width: 60%;
+        height: 60%;
+        background: radial-gradient(
+          circle,
+          var(--primary-darker) 0%,
+          transparent 70%
+        );
+        animation-delay: -5s;
+      }
+
+      .blob-3 {
+        top: 40%;
+        left: 50%;
+        width: 40%;
+        height: 40%;
+        background: radial-gradient(
+          circle,
+          var(--primary-light) 0%,
+          transparent 70%
+        );
+        animation-delay: -10s;
+      }
+
+      @keyframes blobFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(5%, 5%) scale(1.1);
+        }
+        50% {
+          transform: translate(-5%, 10%) scale(0.9);
+        }
+        75% {
+          transform: translate(10%, -5%) scale(1.05);
+        }
+      }
+
+      .glass-panel {
+        background: rgba(15, 77, 25, 0.15);
+        backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(111, 194, 124, 0.1);
+        box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2),
+          0 0 1px 0 rgba(111, 194, 124, 0.1);
+      }
+
+      .position-card {
+        background: linear-gradient(
+          145deg,
+          rgba(26, 95, 37, 0.3),
+          rgba(15, 77, 25, 0.3)
+        );
+        border: 1px solid rgba(111, 194, 124, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .position-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(111, 194, 124, 0.1),
+          transparent
+        );
+        transition: 0.5s;
+      }
+
+      .position-card:hover::before {
+        left: 100%;
+      }
+
+      .stat-box {
+        background: rgba(15, 77, 25, 0.3);
+        border: 1px solid rgba(111, 194, 124, 0.15);
+        transition: all 0.3s ease;
+      }
+
+      .live-indicator {
+        width: 8px;
+        height: 8px;
+        background: var(--accent-green);
+        border-radius: 50%;
+        position: relative;
+      }
+
+      .live-indicator::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 50%;
+        background: var(--accent-green);
+        animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(15, 77, 25, 0.1);
+        border-radius: 3px;
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(111, 194, 124, 0.2);
+        border-radius: 3px;
+      }
+
+      .number-display {
+        font-feature-settings: "tnum";
+        font-variant-numeric: tabular-nums;
+      }
+
+      .value-change-up {
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .value-change-down {
+        animation: slideDown 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(10px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes ping {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        75%,
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      .hover-glow:hover {
+        box-shadow: 0 0 20px rgba(111, 194, 124, 0.2);
+      }
+
+      .ticker-pulse {
+        animation: tickerPulse 2s infinite;
+      }
+
+      @keyframes tickerPulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="p-3 md:p-6 text-white">
+    <!-- Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Main Container -->
+    <main
+      class="max-w-7xl mx-auto glass-panel rounded-2xl p-4 md:p-6 relative z-10"
+    >
+      <!-- Header Section -->
+      <header class="relative mb-8">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between pb-6 border-b border-[#6fc27c]/10"
+        >
+          <div class="flex items-center gap-4 mb-4 md:mb-0">
+            <div class="relative">
+              <div
+                class="absolute inset-0 bg-[#44ff88]/20 blur-xl rounded-full"
+              ></div>
+              <div class="bg-[#0f4d19] p-3 rounded-xl relative">
+                <i class="fas fa-robot text-[#6fc27c] text-xl"></i>
+              </div>
+            </div>
+            <div>
+              <h1
+                class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#6fc27c] to-[#44ff88] bg-clip-text text-transparent"
+              >
+                PNL Tracker Elite
+              </h1>
+              <div class="flex items-center gap-2 mt-1">
+                <div class="live-indicator"></div>
+                <p class="text-[#6fc27c] text-sm">Live Market Monitor</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Market Prices -->
+          <div class="flex flex-wrap justify-center gap-4">
+            <div
+              class="stat-box rounded-xl p-4 backdrop-blur-md relative group hover-glow"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-[#0f4d19]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+              ></div>
+              <div class="relative">
+                <div
+                  class="text-xs text-[#6fc27c] mb-1 flex items-center gap-2"
+                >
+                  <i class="fas fa-ethereum text-xs"></i>
+                  ETH/USDT
+                </div>
+                <div
+                  class="text-lg font-bold text-[#a8e0b1] number-display ticker-pulse"
+                >
+                  2698.890097
+                </div>
+              </div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 backdrop-blur-md relative group hover-glow"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-[#0f4d19]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
+              ></div>
+              <div class="relative">
+                <div
+                  class="text-xs text-[#6fc27c] mb-1 flex items-center gap-2"
+                >
+                  <i class="fab fa-bitcoin text-xs"></i>
+                  BTC/USDT
+                </div>
+                <div
+                  class="text-lg font-bold text-[#a8e0b1] number-display ticker-pulse"
+                >
+                  75933.847391
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Positions Grid -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[calc(100vh-12rem)] overflow-y-auto custom-scrollbar pb-4"
+      >
+        <!-- Position 1 - POPCAT -->
+        <div
+          class="position-card rounded-xl p-5 relative hover-glow overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-transparent via-[#0f4d19]/5 to-[#6fc27c]/5 pointer-events-none"
+          ></div>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5"
+          >
+            <div class="flex items-center flex-wrap gap-3">
+              <span
+                class="bg-[#1a5f25]/80 px-4 py-2 rounded-lg text-[#a8e0b1] font-bold backdrop-blur-sm"
+              >
+                Trap1/2
+              </span>
+              <span
+                class="bg-[#ff4444]/10 border border-[#ff4444]/20 text-[#ff4444] px-4 py-2 rounded-lg text-sm"
+              >
+                SHORT
+              </span>
+            </div>
+            <span
+              class="mt-2 sm:mt-0 text-[#6fc27c] bg-[#1a5f25]/60 px-4 py-2 rounded-lg backdrop-blur-sm"
+            >
+              POPCAT
+            </span>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Active BE</div>
+              <div class="text-[#a8e0b1] number-display text-lg">1.610887</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">QTY</div>
+              <div class="text-[#a8e0b1] number-display text-lg">59.597596</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">CP</div>
+              <div class="text-[#a8e0b1] number-display text-lg">1.613806</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Points</div>
+              <div class="text-[#ff4444] number-display text-lg">-0.000500</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Position 2 - MEW -->
+        <div
+          class="position-card rounded-xl p-5 relative hover-glow overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-transparent via-[#0f4d19]/5 to-[#6fc27c]/5 pointer-events-none"
+          ></div>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5"
+          >
+            <div class="flex items-center flex-wrap gap-3">
+              <span
+                class="bg-[#1a5f25]/80 px-4 py-2 rounded-lg text-[#a8e0b1] font-bold backdrop-blur-sm"
+              >
+                Trap1/2
+              </span>
+              <span
+                class="bg-[#ff4444]/10 border border-[#ff4444]/20 text-[#ff4444] px-4 py-2 rounded-lg text-sm"
+              >
+                SHORT
+              </span>
+            </div>
+            <span
+              class="mt-2 sm:mt-0 text-[#6fc27c] bg-[#1a5f25]/60 px-4 py-2 rounded-lg backdrop-blur-sm"
+            >
+              MEW
+            </span>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Active BE</div>
+              <div class="text-[#a8e0b1] number-display text-lg">0.009500</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">QTY</div>
+              <div class="text-[#a8e0b1] number-display text-lg">59.931171</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">CP</div>
+              <div class="text-[#a8e0b1] number-display text-lg">0.009508</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Points</div>
+              <div class="text-[#ff4444] number-display text-lg">-0.000002</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Position 3 - 1000CAT -->
+        <div
+          class="position-card rounded-xl p-5 relative hover-glow overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-transparent via-[#0f4d19]/5 to-[#6fc27c]/5 pointer-events-none"
+          ></div>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5"
+          >
+            <div class="flex items-center flex-wrap gap-3">
+              <span
+                class="bg-[#1a5f25]/80 px-4 py-2 rounded-lg text-[#a8e0b1] font-bold backdrop-blur-sm"
+              >
+                Trap1/2
+              </span>
+              <span
+                class="bg-[#44ff88]/10 border border-[#44ff88]/20 text-[#44ff88] px-4 py-2 rounded-lg text-sm"
+              >
+                LONG
+              </span>
+            </div>
+            <span
+              class="mt-2 sm:mt-0 text-[#6fc27c] bg-[#1a5f25]/60 px-4 py-2 rounded-lg backdrop-blur-sm"
+            >
+              1000CAT
+            </span>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Active BE</div>
+              <div class="text-[#a8e0b1] number-display text-lg">0.033760</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">QTY</div>
+              <div class="text-[#a8e0b1] number-display text-lg">59.990105</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">CP</div>
+              <div class="text-[#a8e0b1] number-display text-lg">0.033884</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Points</div>
+              <div class="text-[#44ff88] number-display text-lg">+0.000060</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300 col-span-2"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Change %</div>
+              <div class="text-[#44ff88] number-display text-lg">0.179899</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Position 4 - MOODENG -->
+        <div
+          class="position-card rounded-xl p-5 relative hover-glow overflow-hidden"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-transparent via-[#0f4d19]/5 to-[#6fc27c]/5 pointer-events-none"
+          ></div>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5"
+          >
+            <div class="flex items-center flex-wrap gap-3">
+              <span
+                class="bg-[#1a5f25]/80 px-4 py-2 rounded-lg text-[#a8e0b1] font-bold backdrop-blur-sm"
+              >
+                Trap1/2
+              </span>
+              <span
+                class="bg-[#44ff88]/10 border border-[#44ff88]/20 text-[#44ff88] px-4 py-2 rounded-lg text-sm"
+              >
+                LONG
+              </span>
+            </div>
+            <span
+              class="mt-2 sm:mt-0 text-[#6fc27c] bg-[#1a5f25]/60 px-4 py-2 rounded-lg backdrop-blur-sm"
+            >
+              MOODENG
+            </span>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Active BE</div>
+              <div class="text-[#a8e0b1] number-display text-lg">0.220179</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">QTY</div>
+              <div class="text-[#a8e0b1] number-display text-lg">60.091673</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">CP</div>
+              <div class="text-[#a8e0b1] number-display text-lg">0.220180</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Points</div>
+              <div class="text-[#44ff88] number-display text-lg">+0.000260</div>
+            </div>
+            <div
+              class="stat-box rounded-xl p-4 hover:bg-[#1a5f25]/40 transition-all duration-300 col-span-2"
+            >
+              <div class="text-xs text-[#6fc27c]/80 mb-2">Change %</div>
+              <div class="text-[#44ff88] number-display text-lg">0.119957</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Stats Section -->
+      <footer class="mt-8 pt-6 border-t border-[#6fc27c]/10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+          <!-- Daily PNL -->
+          <div
+            class="stat-box rounded-xl p-5 relative overflow-hidden group hover-glow"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-[#44ff88]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+            <div class="flex justify-between items-center mb-3">
+              <div class="text-[#6fc27c]">Daily PNL</div>
+              <i class="fas fa-chart-line text-[#6fc27c]/50"></i>
+            </div>
+            <div
+              class="text-xl font-bold text-[#44ff88] number-display relative"
+            >
+              +0.15214
+              <div
+                class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-[#44ff88]/50 to-transparent"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Total Positions -->
+          <div
+            class="stat-box rounded-xl p-5 relative overflow-hidden group hover-glow"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-[#6fc27c]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+            <div class="flex justify-between items-center mb-3">
+              <div class="text-[#6fc27c]">Total Positions</div>
+              <i class="fas fa-layer-group text-[#6fc27c]/50"></i>
+            </div>
+            <div class="text-xl font-bold text-[#a8e0b1]">4 Active</div>
+          </div>
+
+          <!-- Total PNL -->
+          <div
+            class="stat-box rounded-xl p-5 relative overflow-hidden group hover-glow"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-[#44ff88]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+            <div class="flex justify-between items-center mb-3">
+              <div class="text-[#6fc27c]">Total PNL</div>
+              <i class="fas fa-signal text-[#6fc27c]/50"></i>
+            </div>
+            <div
+              class="text-xl font-bold text-[#44ff88] number-display relative"
+            >
+              +0.29956
+              <div
+                class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-[#44ff88]/50 to-transparent"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio Overview -->
+        <div
+          class="stat-box rounded-xl p-6 backdrop-blur-md relative overflow-hidden hover-glow"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-[#0f4d19]/20 to-transparent"
+          ></div>
+          <div class="relative">
+            <div class="flex items-center justify-between mb-4">
+              <div class="text-[#6fc27c] text-lg">Portfolio Overview</div>
+              <div class="flex gap-3">
+                <span
+                  class="px-3 py-1.5 rounded-lg bg-[#44ff88]/10 text-[#44ff88] text-sm border border-[#44ff88]/20"
+                >
+                  2 LONG
+                </span>
+                <span
+                  class="px-3 py-1.5 rounded-lg bg-[#ff4444]/10 text-[#ff4444] text-sm border border-[#ff4444]/20"
+                >
+                  2 SHORT
+                </span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-6">
+              <div>
+                <div class="text-[#6fc27c]/80 text-sm mb-2">Total Value</div>
+                <div class="text-2xl font-bold text-[#a8e0b1] number-display">
+                  239.61
+                </div>
+              </div>
+              <div>
+                <div class="text-[#6fc27c]/80 text-sm mb-2">ROI</div>
+                <div class="text-2xl font-bold text-[#44ff88]">+0.32%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Last Update -->
+        <div class="text-center text-[#6fc27c]/50 text-sm mt-6">
+          Last Updated: <span class="text-[#6fc27c]">Just now</span>
+          <i
+            class="fas fa-circle text-[#44ff88] animate-pulse ml-1 text-[6px] align-middle"
+          ></i>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      // Update Values Animation
+      function updateValue(element, newValue, oldValue) {
+        const valueChange = newValue - oldValue;
+        element.classList.remove("value-change-up", "value-change-down");
+        void element.offsetWidth;
+        element.classList.add(
+          valueChange >= 0 ? "value-change-up" : "value-change-down"
+        );
+        element.textContent =
+          typeof newValue === "number"
+            ? Math.abs(newValue) < 0.0001
+              ? newValue.toFixed(8)
+              : newValue.toFixed(6)
+            : newValue;
+      }
+
+      // Simulate Live Updates
+      function simulateUpdates() {
+        document.querySelectorAll(".number-display").forEach((element) => {
+          if (Math.random() > 0.7) {
+            const currentValue = parseFloat(element.textContent);
+            if (!isNaN(currentValue)) {
+              const change = (Math.random() - 0.5) * 0.001;
+              const newValue = currentValue * (1 + change);
+              updateValue(element, newValue, currentValue);
+            }
+          }
+        });
+      }
+
+      // Auto-updating timestamp
+      function updateTimestamp() {
+        const timestampSpan = document.querySelector(".text-center span");
+        timestampSpan.textContent = "Just now";
+      }
+
+      setInterval(simulateUpdates, 2000);
+      setInterval(updateTimestamp, 5000);
+    </script>
+  </body>
+</html>
