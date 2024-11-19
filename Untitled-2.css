@@ -1,0 +1,162 @@
+/* selector{
+    property:value;
+} */
+*,
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
+html {
+    background-color: rgba(0, 0, 0, 0.181);
+}
+
+body {
+    color: #000;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 100dvh;
+    padding: 20px;
+}
+
+p {
+    font-weight: 900;
+    border-left: 2px solid #333;
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.hero-page {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+    gap: 7%;
+}
+
+.hero-section {
+    width: 40%;
+    display: grid;
+    gap: 10px;
+}
+
+.curves2 {
+    border-radius: 50%;
+    /* -webkit-box-reflect: right; */
+}
+
+a {
+    /* neat flex-box in css */
+    display: flex;
+    justify-items: center;
+    gap: 5px;
+    mix-blend-mode: difference;
+}
+
+h1 {
+    background: url("https://ritaquantcode.github.io/about-me/images/curves1.jpeg") no-repeat center center / cover;
+    font-size: 50px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: red;
+    font-size: medium;
+    border-radius: 100px;
+    padding: 20px;
+    margin: 10px 0;
+    border: none;
+    color: whitesmoke;
+    font-weight: 900;
+}
+
+.button1 {
+    background-color: blue;
+}
+
+#button2 {
+    background-color: green;
+
+}
+
+.social-links {
+    display: grid;
+}
+
+.portfolio {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #f7f7f7;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.portfolio-section {
+    flex: 1 1 25%;
+    /* width: 100%; */
+    min-width: 250px;
+    background-color: #4caf50;
+    padding: 20px;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-section:hover {
+    transform: translate(10px, -10px);
+}
+
+table {
+    width: 100%;
+    background-color: #fff;
+    border-collapse: collapse;
+
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+td {
+    background: #f9f9f9;
+    color: #333;
+
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+/* @media (condition) {
+ Your CSS rules for this condition 
+} */
+/* mobile view */
+@media (max-width: 600px) {
+    .hero-page {
+        flex-direction: column;
+    }
+
+    .hero-section {
+        width: 100%;
+    }
+
+}
