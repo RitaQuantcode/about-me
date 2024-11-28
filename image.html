@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PNL Tracker Logo</title>
+    <style>
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      svg {
+        max-width: 300px;
+        width: 100%;
+        height: auto;
+      }
+
+      .eye {
+        animation: blink 4s infinite;
+        transform-origin: center;
+      }
+
+      .eye-right {
+        animation-delay: 0.2s;
+      }
+
+      @keyframes blink {
+        0%,
+        96%,
+        98% {
+          transform: scaleY(1);
+        }
+        97% {
+          transform: scaleY(0.1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Background circle -->
+      <circle cx="100" cy="100" r="98" fill="#1E222D" />
+
+      <!-- Robot face outline -->
+      <rect
+        x="50"
+        y="45"
+        width="100"
+        height="110"
+        rx="10"
+        fill="#2C3E50"
+        stroke="#4CAF50"
+        stroke-width="3"
+      />
+
+      <!-- Eyes with animation -->
+      <circle class="eye eye-left" cx="80" cy="85" r="12" fill="#4CAF50">
+        <animate
+          attributeName="opacity"
+          values="1;1;0.3;1;1"
+          dur="4s"
+          repeatCount="indefinite"
+        />
+      </circle>
+      <circle class="eye eye-right" cx="120" cy="85" r="12" fill="#4CAF50">
+        <animate
+          attributeName="opacity"
+          values="1;1;0.3;1;1"
+          dur="4s"
+          repeatCount="indefinite"
+          begin="0.2s"
+        />
+      </circle>
+
+      <!-- LED displays -->
+      <rect x="65" y="110" width="70" height="25" rx="5" fill="#1E1E1E" />
+
+      <!-- PNL display text -->
+      <text
+        x="100"
+        y="127"
+        font-family="monospace"
+        font-size="14"
+        fill="#4CAF50"
+        text-anchor="middle"
+      >
+        PNL
+      </text>
+
+      <!-- Antenna -->
+      <path
+        d="M100 45 L100 25 M90 25 L110 25"
+        stroke="#4CAF50"
+        stroke-width="3"
+        fill="none"
+      />
+
+      <!-- Candlestick chart background -->
+      <path d="M70 140 L130 140" stroke="#2E7D32" stroke-width="2" />
+      <path d="M80 135 L80 145" stroke="#4CAF50" stroke-width="2" />
+      <path d="M90 133 L90 147" stroke="#E53935" stroke-width="2" />
+      <path d="M100 137 L100 143" stroke="#4CAF50" stroke-width="2" />
+      <path d="M110 132 L110 148" stroke="#4CAF50" stroke-width="2" />
+      <path d="M120 136 L120 144" stroke="#E53935" stroke-width="2" />
+
+      <!-- Circuit board lines -->
+      <path
+        d="M40 60 L50 60 M40 100 L50 100 M150 60 L160 60 M150 100 L160 100"
+        stroke="#4CAF50"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+
+      <!-- Glow filter -->
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Glow effects for eyes -->
+      <circle
+        class="eye eye-left"
+        cx="80"
+        cy="85"
+        r="14"
+        fill="#4CAF50"
+        opacity="0.3"
+        filter="url(#glow)"
+      />
+      <circle
+        class="eye eye-right"
+        cx="120"
+        cy="85"
+        r="14"
+        fill="#4CAF50"
+        opacity="0.3"
+        filter="url(#glow)"
+      />
+    </svg>
+  </body>
+</html>
